@@ -6,3 +6,4 @@ class Source:
         self.id = id
         self.name = name
         self.description = description
+        self.category = category
