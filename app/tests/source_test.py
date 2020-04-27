@@ -25,6 +25,8 @@ class SourceTest(unittest.TestCase):
         self.assertEqual(self.new_source.id, 'bbc-news')
         self.assertEqual(self.new_source.name,'BBC News')
         self.assertEqual(self.new_source.description,'Use BBC News for up-to-the-minute news, breaking news, video, audio and feature stories')
+        self.assertEqual(self.new_source.url,'http://www.bbc.co.uk/news')
+        self.assertEqual(self.new_source.category,'general')
     
 
 if__name__== '__main__':

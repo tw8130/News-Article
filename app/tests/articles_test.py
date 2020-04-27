@@ -10,7 +10,7 @@ class ArticleTest(unitttest.TestCase):
         '''
         Set up method that will run before every Test
         '''
-        self.new_article = Articles('Jeremy Bogaisky','Boeing-Embraer Deal Collapses - Forbes','Boeing has abandoned a deal to buy 80% of Embraer’s commercial aircraft business for $4.2 billion, stating Saturday morning that the Brazilian company didn’t satisfy necessary conditions of the agreement','null','"https://www.forbes.com/sites/jeremybogaisky/2020/04/25/boeing-embraer-deal-collapses/','2020-04-25T15:16:58Z')
+        self.new_article = Articles('Harry Domanski','Samsung`s next smartphone could have a pop-up selfie camera - TechRadar India','Leaked renders show every angle of potential new handset','https://cdn.mos.cms.futurecdn.net/9W2JuazWDRjWaRMUi2dCPc-1200-80.jpg','https://www.techradar.com/news/samsungs-next-smartphone-could-have-a-pop-up-selfie-camera','2020-04-27T03:16:00Z')
     
     def test_instance(self):
         '''
@@ -23,19 +23,19 @@ class ArticleTest(unitttest.TestCase):
         Test case to check if the Article class is initialized
         '''
 
-        self.assertEqual( self.new_article.author, 'Jeremy Bogaisky')
-        self.assertEqual( self.new_article.title, 'Boeing-Embraer Deal Collapses - Forbes')
-        self.assertEqual( self.new_article.description, 'Boeing-Embraer Deal Collapses - Forbes','Boeing has abandoned a deal to buy 80% of Embraer’s commercial aircraft business for $4.2 billion, stating Saturday morning that the Brazilian company didn’t satisfy necessary conditions of the agreement')
-        self.assertEqual( self.new_article.urlToImage,'null')
-        self.assertEqual( self.new_article.url, 'https://www.forbes.com/sites/jeremybogaisky/2020/04/25/boeing-embraer-deal-collapses/')
-        self.assertEqual( self.new_article.publishedAt, '2020-04-25T15:16:58Z')
+        self.assertEqual( self.new_article.author, 'Harry Domanski')
+        self.assertEqual( self.new_article.title, 'Samsung`s next smartphone could have a pop-up selfie camera - TechRadar India')
+        self.assertEqual( self.new_article.description, 'Leaked renders show every angle of potential new handset')
+        self.assertEqual( self.new_article.urlToImage,'https://cdn.mos.cms.futurecdn.net/9W2JuazWDRjWaRMUi2dCPc-1200-80.jpg')
+        self.assertEqual( self.new_article.url, 'https://www.techradar.com/news/samsungs-next-smartphone-could-have-a-pop-up-selfie-camera')
+        self.assertEqual( self.new_article.publishedAt, '2020-04-27T03:16:00Z')
     
     def test_publish_date_format(self):
         '''
         Test case to check if UTC date format is converted to a display-friendly format
         '''
         display_friendly_format = self.new_article.publish_date_format(self.new_article.publishedAt)
-        self.assertEqual( display_friendly_format, '2020-04-25')
+        self.assertEqual( display_friendly_format, '2020-04-27')
 
 
 if __name__ == '__main__':
