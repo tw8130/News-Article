@@ -1,5 +1,5 @@
 import urllib.request,json
-from .models import Source,Article
+from .models import Source,Articles
 
 # Source = source.Source
 api_key = None
@@ -25,15 +25,15 @@ def get_sources(source):
         get_sources_data = url.read()
         get_sources_response = json.loads(get_sources_data)
 
-        sources_results = None
+        source_results = None
 
         if get_sources_response['sources']:
             sources_results_list = get_sources_response['sources']
-            sources_results = process_results(sources_results_list)
+            source_results = process_results(source_results_list)
 
-    return sources_results
+    return source_results
 
-def process_results(sources_list):
+def process_results(source_list):
 
     """
     Function that process  the sources result and transform them to a list of Objects
@@ -45,9 +45,9 @@ def process_results(sources_list):
     source_results:A list of news source Objects
     """
 
-    sources_results=[]
+    source_results=[]
 
-    for source_item in sources_list:
+    for source_item in source_list:
         id = source_item.get('id')
         name = source_item.get('name')
         description = source_item.get('description')
@@ -56,11 +56,30 @@ def process_results(sources_list):
 
 
 
-        source_object = Sources(id,name,description,url,category)
-        sources_results.append(source_object)
+        source_object = Source(id,name,description,url,category)
+        source_results.append(source_object)
 
         # print(source_list)
 
-    return sources_results
+    return source_results
+
+def get_articles(id):
+    '''
+    Function to get a source and it's articles
+    '''
+    get_articles_url = base_url_articles.format(id,api_key)
+
+    with urllib.request.urlopen(get_articles_url) as url:
+        get_articles_data = url.read()
+        get_articles_response = json.loads(get_articles_data)
+
+        articles_results = None
+
+        if get_articles_response['articles']:
+            articles_results_list = get_articles_response['articles']
+            articles_results = process_articles(articles_results_list)
+    
+    return articles_results
+
 
 
