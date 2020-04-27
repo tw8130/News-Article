@@ -14,3 +14,26 @@
 
         {% endfor %}
 {% endmacro %}
+
+<!-- Display the articles -->
+{% macro displayArticleList(article_list) %}
+    {% for article in article_list %}
+    <!-- print source here -->
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-">
+              <li class="well" style="list-style:none;background-color:white;">
+                  <a href="{{article.url}}"style="text-decoration:none;">
+                    <h3 style="font-size:16px;color:#da083c;">
+                        {{article.title}}
+                    </h3>
+                     <p style="font-size:10px;">  Date: {{article.publishedAt[:10]}} </p>
+                    <p style="font-size:12px; color:black;">{{article.description|truncate(70)}}</p>
+                    <a href="{{ article.url }}" class="article-link" style="color:#c01515;"> VIEW ARTICLE....</a>
+                    <img src='{{article.urlToImage}}' width="" height="" class="img-responsive">
+
+              </li>
+      </div>
+
+
+    {% endfor %}
+
+{% endmacro %}
