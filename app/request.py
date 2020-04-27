@@ -13,13 +13,13 @@ def configure_request(app):
     base_url_articles=app.config["NEWS_API_ARTICLE_URL"]
 
 
-def get_sources():
+def get_sources(source):
 
     """
     Function that gets the json response to our url request
     """
 
-    get_sources_url = base_url.format(api_key)
+    get_sources_url = base_url.format(source,api_key)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -33,5 +33,34 @@ def get_sources():
 
     return sources_results
 
+def process_results(sources_list):
+
+    """
+    Function that process  the sources result and transform them to a list of Objects
+
+    Args:
+    source_list:A list of dictionaries that contain  news source details
+
+    Returns:
+    source_results:A list of news source Objects
+    """
+
+    sources_results=[]
+
+    for source_item in sources_list:
+        id = source_item.get('id')
+        name = source_item.get('name')
+        description = source_item.get('description')
+        url = source_item.get('url')
+        category = source_item.get('category')
+
+
+
+        source_object = Sources(id,name,description,url,category)
+        sources_results.append(source_object)
+
+        # print(source_list)
+
+    return sources_results
 
 
