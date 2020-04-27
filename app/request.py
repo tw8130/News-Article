@@ -81,5 +81,30 @@ def get_articles(id):
     
     return articles_results
 
+def process_articles(article_list):
+    '''
+    Function that processes the article results and transform them to a list of objects
+
+    Args:
+        article_list: A list of dictionaries that contain article details
+    Returns :
+        article_results: A list of article objects
+    '''
+    article_results = []
+
+    for article_item in article_list:
+        source = article_item.get('source')
+        author = article_item.get('author')
+        title = article_item.get('title')
+        urlToImage = article_item.get('urlToImage')
+        description = article_item.get('description')
+        urlToArticle = article_item.get('url')
+        publishedAt = article_item.get('publishedAt')
+
+        article_object = Articles(source,author, title, description, urlToImage, urlToArticle, publishedAt)
+        article_results.append(article_object)
+    
+    return article_results
+
 
 
