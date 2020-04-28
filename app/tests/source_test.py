@@ -28,6 +28,5 @@ class SourceTest(unittest.TestCase):
         self.assertEqual(self.new_source.url,'http://www.bbc.co.uk/news')
         self.assertEqual(self.new_source.category,'general')
     
-
-if__name__== '__main__':
+if __name__== '__main__':
     unittest.main(verbosity=2)

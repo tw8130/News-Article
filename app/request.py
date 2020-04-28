@@ -5,14 +5,16 @@ from .models import Source,Articles
 apiKey = None
 base_url = None
 base_url_articles=None
-base_url_search=None
+everything_url = None
+everything_search_url = None
 
 def configure_request(app):
     global apiKey,base_url,base_url_articles
     apiKey = app.config['NEWS_API_KEY']
     base_url = app.config["NEWS_API_BASE_URL"]
     base_url_articles=app.config["NEWS_API_ARTICLE_URL"]
-    base_url_search=app.config['NEWS_API_SEARCH_URL']
+    everything_url = app.config['EVERYTHING_BASE_URL']
+    everything_search_url = app.config['EVERYTHING_SEARCH_URL']
 
 
 def get_sources(sources):
@@ -109,14 +111,35 @@ def process_articles(article_list):
     
     return article_results
 
-def search_news(name):
-    search_news_url = 'https://newsapi.org/v2/everything?q={}&apiKey={}'.format(name,apiKey)
-    search_news_response = requests.get(search_news_url).json()
+def everything(limit):
+    '''
+    Function that gets articles based on the source id
+    '''
+    get_everything_url = everything_url.format(limit,apiKey)
 
-    if search_news_response['articles']:
-        search_article_list = search_news_response['articles']
-        search_news_results = process_articles(search_article_list) 
+    with urllib.request.urlopen(get_everything_url) as url:
+        everything_data = url.read()
+        everything_response = json.loads(everything_data)
 
-    return search_news_results   
+        everything_results = None
 
+        if everything_response['articles']:
+            everything_results = process_articles(everything_response['articles'])
+        
+    return everything_results
 
+def search_everything(limit,query):
+    '''
+    Function that looks for articles based on top headlines
+    '''
+    search_everything_url = everything_search_url.format(query,limit,api_key)
+    with urllib.request.urlopen(search_everything_url) as url:
+        search_everything_data = url.read()
+        search_everything_response = json.loads(search_everything_data)
+
+        search_everything_results=[]
+
+        if search_everything_response['articles']:
+            search_everything_results = process_articles(search_everything_response['articles'])
+    
+    return search_everything_results
