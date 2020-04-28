@@ -11,7 +11,7 @@
         </div>
     </div> -->
     <div class="row">
-        {% for article in article_list %}
+        {% for article in news %}
         <div class="col-md-3 articles-details">
             <a href={{article.url}} target="_blank">
                 <img src={{article.urlToImage}} alt="IMAGE LOADING..." class="img-responsive">
@@ -28,10 +28,6 @@
         </div>
         {% endfor %}
     </div>
-    <div class="container">
-        <div class="row">
-            <button class="btn btn-warning" action="{{url_for(/everything&50)}}">Load More</button>
-        </div>
-    </div>
+    
 </div>
 {% endblock%}

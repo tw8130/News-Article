@@ -15,16 +15,17 @@ def configure_request(app):
     base_url_articles=app.config["NEWS_API_ARTICLE_URL"]
     everything_url = app.config['EVERYTHING_BASE_URL']
     everything_search_url = app.config['EVERYTHING_SEARCH_URL']
+    print(app.config,'-=-=================')
+    
 
 
-def get_sources(sources):
+def get_sources():
 
     """
     Function that gets the json response to our url request
     """
 
-    get_sources_url = 'https://newsapi.org/v2/sources?language=en{}&apiKey={}' .format(sources,apiKey)
-    print(apiKey,'-----------------------')
+    get_sources_url = 'https://newsapi.org/v2/sources?language=en&apiKey={}'.format(apiKey)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -72,7 +73,7 @@ def get_articles(source_id):
     Function to get a source and it's articles
     '''
     get_articles_url = 'https://newsapi.org/v2/top-headlines?sources={}&apiKey={}'.format(source_id,apiKey)
-    import pdb;pdb.set_trace()
+    # import pdb;pdb.set_trace()
    
     with urllib.request.urlopen(get_articles_url) as url:
         get_articles_data = url.read()
@@ -115,7 +116,7 @@ def everything(limit):
     '''
     Function that gets articles based on the source id
     '''
-    get_everything_url = everything_url.format(limit,apiKey)
+    get_everything_url = 'https://newsapi.org/v2/everything?sources=bbc-news,al-jazeera-english,cnn,independent,google-news,the-telegraph,mashable,the-lad-bible,buzzfeed,bloomberg,engadget,espn,fortune&sortBy=publishedAt&pageSize={}&apiKey={}'.format(limit,apiKey)
 
     with urllib.request.urlopen(get_everything_url) as url:
         everything_data = url.read()
@@ -132,7 +133,7 @@ def search_everything(limit,query):
     '''
     Function that looks for articles based on top headlines
     '''
-    search_everything_url = everything_search_url.format(query,limit,api_key)
+    search_everything_url = 'https://newsapi.org/v2/everything?q={}&pageSize={}&apiKey={}'.format(query,limit,apiKey)
     with urllib.request.urlopen(search_everything_url) as url:
         search_everything_data = url.read()
         search_everything_response = json.loads(search_everything_data)

@@ -11,7 +11,8 @@ def index():
 
     title = 'Home- Welcome News Highlights Website'
     # Getting the news sources
-    news_sources = get_sources('cnn')
+    news_sources = get_sources()
+    print(news_sources)
     return render_template('index.html', title=title, sources=news_sources)
 
 @main.route('/articles/<source_id>')
@@ -38,7 +39,7 @@ def all_news(per_page):
     if search_articles:
         return redirect(url_for('main.search',topic=search_articles))
     else:
-        return render_template('topheadlines.html', title=title, name='All News', news=everything_news)
+        return render_template('everything.html', title=title, name='All News', news=everything_news)
 
 @main.route('/search/<topic>')
 def search(topic):
