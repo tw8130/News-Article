@@ -28,9 +28,13 @@ navbar
 
 # Technologies Used
 PYTHON
+
 PIP
+
 FLASK FRAMEWORK
+
 BOOTSTRAP
+
 CSS
 
 # Behavior Driven Development
